@@ -14,13 +14,13 @@ try {
         `SELECT * FROM users WHERE email = $1`,
          [email]
     );
-    if(!user) return res.sendStatus(401);
+    if(user.length === 0) return res.sendStatus(401);
 
     const isPasswordValid = await bcrypt.compare(password, user[0].password);
 
     if(!isPasswordValid) return res.sendStatus(401);
 
-    res.status(200).send(generateToken({id: user.id, name: user.name}));
+    res.status(200).send(generateToken({id: user[0].id, name: user[0].name}));
     
 } catch (e) {
     console.log(e);
