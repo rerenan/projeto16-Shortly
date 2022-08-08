@@ -20,7 +20,7 @@ try {
 
     if(!isPasswordValid) return res.sendStatus(401);
 
-    res.status(200).send(generateToken({id: user[0].id, name: user[0].name}));
+    res.status(200).send(generateToken({userId: user[0].id, name: user[0].name}));
     
 } catch (e) {
     console.log(e);

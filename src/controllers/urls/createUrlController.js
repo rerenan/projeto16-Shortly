@@ -5,7 +5,7 @@ import urlSchema from "../../utils/urlSchema.js";
 
 const createUrlController = async (req, res) =>{
     const {url} = req.body;
-    const {id} = res.locals.user;
+    const {userId} = res.locals.user;
 
     try {
         const {error} = urlSchema.validate(req.body, {abortEarly: false});
@@ -17,7 +17,7 @@ const createUrlController = async (req, res) =>{
                 INSERT INTO urls ("userId", url, "shortUrl")
                 VALUES ($1, $2, $3)
             `,
-            [id, url, shortUrl]
+            [userId, url, shortUrl]
         );
         
         res.status(201).send({shortUrl});
