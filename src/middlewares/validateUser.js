@@ -8,9 +8,9 @@ const validateUser = async (req, res, next) =>{
 
     if(!token) return res.sendStatus(401);
     try {
-        
         const user = jwt.verify(token, process.env.JWT_SECRET);
         res.locals.user = user.user;
+
     } catch (e) {
         console.log(e);
         res.sendStatus(500);

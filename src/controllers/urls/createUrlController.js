@@ -1,5 +1,6 @@
 import {nanoid} from "nanoid";
-import { connection } from "../../database.js";
+
+import { urlRepository } from "../../repositories/urlRepository.js";
 
 import urlSchema from "../../utils/urlSchema.js";
 
@@ -12,13 +13,7 @@ const createUrlController = async (req, res) =>{
         if(error) return res.status(422).send(error.message);
         const shortUrl = nanoid(8);
         
-        await connection.query(
-            `
-                INSERT INTO urls ("userId", url, "shortUrl")
-                VALUES ($1, $2, $3)
-            `,
-            [userId, url, shortUrl]
-        );
+        await urlRepository.addUrl(userId, url, shortUrl);
         
         res.status(201).send({shortUrl});
 
