@@ -20,7 +20,7 @@ const createUrlController = async (req, res) =>{
             [id, url, shortUrl]
         );
         
-        res.status(201).json({shortUrl});
+        res.status(201).send({shortUrl});
 
     } catch (e) {
         console.log(e);
