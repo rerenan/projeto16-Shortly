@@ -9,7 +9,7 @@ const getMeController = async (req, res) => {
         if (user.length === 0) return res.sendStatus(404);
 
         const { rows: userUrls } = await urlRepository.getUserUrls(userId);
-        const resultUser = { ...user, shortenedUrls: userUrls };
+        const resultUser = { ...user[0], shortenedUrls: userUrls };
 
         res.status(200).send(resultUser);
 
